@@ -1,0 +1,9 @@
+a9b973faf52bb9a8cf0f3cad3d106996 *DESCRIPTION
+e28c7cc3ef54f351dd69d080011ad77f *NAMESPACE
+9ee0f894bfac043af4c755a09dfa4537 *R/genset.R
+4e521c64b245eba763f4af775936b94d *build/vignette.rds
+c72e7d5a55c1a5afceae589d9be2399f *inst/doc/Introduction.R
+6a097cd35807d157a57732adb901a28b *inst/doc/Introduction.Rmd
+5af039ae8fac12411531b6c0e4b1dfa9 *inst/doc/Introduction.html
+d7dffb41d0c5782824023cf0afd916ed *man/genset.Rd
+6a097cd35807d157a57732adb901a28b *vignettes/Introduction.Rmd
