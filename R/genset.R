@@ -8,98 +8,11 @@
 #   Check Package:             'Ctrl + Shift + E'
 #   Test Package:              'Ctrl + Shift + T'
 
-# Genset Wrapper
-#' Generate Data Sets for Class Demonstrations
-#'
-#' Generate data sets to demonstrate the importance
-#' of multiple regression. \code{'genset'} generates a
-#' data set from an initial data set to have the same
-#' summary statistics (mean, median, and standard
-#' deviation) but opposing regression results.
-#' The initial data set will have one response variable
-#' (continuous) and two predictor variables
-#' (continous or one continuous and one categorical
-#' with 2 levels) that are statistically significant
-#' in a linear regression model.
-#'
-#' @import stats
-#'
-#' @usage genset(y, x1, x2, method, option, n, decrease, output)
-#'
-#' @param y a vector containing the response variable (continuous),
-#' @param x1 a vector containing the first predictor variable (continuous)
-#' @param x2 a vector containing the second predictor variable (continuous or
-#' categorical with 2 levels). If variable is categorical
-#' then argument is \code{factor(x2)}
-#' @param method the method \code{1} or \code{2} to
-#' be used to generate the data set. \code{1} (default)
-#' rearranges the values within each variable,
-#' and \code{2} is a perturbation method that makes
-#' subtle changes to the values of the variables
-#' @param option the variable(s) that will not be
-#' statistically significant in the new data set
-#' (\code{"x1"} (default), \code{"x2"} or \code{"both"})
-#' @param n maximum number of iterations
-#' @param decrease decreases the signficance level when \code{TRUE},
-#' default is \code{FALSE}
-#' @param output print each interation when \code{TRUE}, default is
-#' \code{FALSE}
-#'
-#' @export
-#'
-#' @author Lori Murray & John Wilson
-#'
-#' @details The summary statistics are within a
-#' (predetermined) tolerance level, and when rounded
-#' will be the same as the original data set. We use
-#' the standard convention 0.05 as the significance
-#' level. The default for the number of iterations is
-#' \code{n=2000}. Less than \code{n=2000} may or may
-#' not be sufficient and is dependent on the initial
-#' data set.
-#'
-#' @return Returns an object of class "data.frame"
-#' containing the generated data set: (in order) the
-#' response variable, first predictor variable and
-#' second predictor variable.
-#'
-#' @references Murray, L. and Wilson, J. (2020). The
-#' Need for Regression: Generating Multiple Data Sets
-#' with Identical Summary Statistics but Differing
-#' Conclusions. {\emph{Decision Sciences Journal of
-#' Innovative Education.}} Accepted for publication.
-#'
-#' @examples
-#' ## Choose variables of interest
-#' y <- mtcars$mpg
-#' x1 <- mtcars$hp
-#' x2 <- mtcars$wt
-#' ## Create a dataframe
-#' set1 <- data.frame(y, x1, x2)
-#' ## Check summary statistics
-#' multi.fun <- function(x) {
-#' c(mean = mean(x), media=median(x), sd=sd(x))
-#' }
-#' round(multi.fun(set1$y), 0)
-#' round(multi.fun(set1$x1), 1)
-#' round(multi.fun(set1$x2), 1)
-#' ## Fit linear regression model
-#' ## to verify regressors are statistically
-#' ## significant (p-value < 0.05)
-#' summary(lm(y ~ x1, x2, data=set1))
-#'
-#' ## Set seed to reproduce same data set
-#' set.seed(101)
-#' set2 <- genset(y, x1, x2, method=1, option="x1", n=1000)
-#' ## Verify summary statistics match set 1
-#' round(multi.fun(set2$y), 0)
-#' round(multi.fun(set2$x1), 1)
-#' round(multi.fun(set2$x2), 1)
-#' ## Fit linear regression model
-#' ## to verify x1 is not statistically
-#' ## significant (p-value > 0.05)
-#' summary(lm(y ~ x1 + x2, data=set2))
+#' @importFrom stats lm median rnorm sd
 
+# Genset Wrapper
+
+#' @export
 
 genset <- function(y, x1, x2, method=c(1,2), option=c("x1", "x2", "both"), n, decrease=FALSE, output=FALSE)
 {
